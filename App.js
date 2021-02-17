@@ -1,11 +1,15 @@
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, LogBox } from 'react-native';
 import Register from "./src/component/auth/Register"
 import Login from "./src/component/auth/Login"
+import {Provider} from 'react-redux'
+import{createStore,applyMiddleware} from 'redux'
+import rootReducer from './src/redux/reducer'
+import thunk from 'redux-thunk'
 
+const store = createStore(rootReducer,applyMiddleware(thunk))
 
-import * as firebase from 'firebase';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAird-St1hVPC5_7wl-ARjX2hleoOhCz9c",
@@ -24,12 +28,21 @@ if (firebase.apps.length === 0) {
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Landing from "./src/component/auth/Landing"
+import Main from "./src/component/main"
+
+
+
+
+
+import * as firebase from 'firebase';
+import 'firebase/firestore';
+
 
 const Stack = createStackNavigator();
 
 
-
 export default class App extends Component {
+  
 
   constructor(props) {
     super()
@@ -39,8 +52,10 @@ export default class App extends Component {
     }
 
   }
-
+  
   componentDidMount() {
+    
+  
     firebase.auth().onAuthStateChanged((user) => {
       if (!user) {
         this.setState({
@@ -88,9 +103,17 @@ export default class App extends Component {
     }
     if(loggedIn){
       return(
-        <View style={{ flex: 1, justifyContent: "center" }}>
-          <Text>User is Log In</Text>
-        </View>
+        <Provider store={store}>
+          <NavigationContainer>
+          <Stack.Navigator initialRouteName="Main">
+            <Stack.Screen name="Main" component={Main} options={{ headerShown: false }} />
+            
+
+          </Stack.Navigator>
+          </NavigationContainer>
+
+        </Provider>
+        
 
       )
     }
