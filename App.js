@@ -7,6 +7,7 @@ import {Provider} from 'react-redux'
 import{createStore,applyMiddleware} from 'redux'
 import rootReducer from './src/redux/reducer'
 import thunk from 'redux-thunk'
+import Add from "./src/component/Add"
 
 const store = createStore(rootReducer,applyMiddleware(thunk))
 
@@ -107,6 +108,7 @@ export default class App extends Component {
           <NavigationContainer>
           <Stack.Navigator initialRouteName="Main">
             <Stack.Screen name="Main" component={Main} options={{ headerShown: false }} />
+            <Stack.Screen name="Add" component={Add} navigation={this.props.navigation} />
             
 
           </Stack.Navigator>

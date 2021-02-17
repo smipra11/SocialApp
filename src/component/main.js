@@ -13,35 +13,45 @@ import Profile from "./Profile"
 
 const Tab = createBottomTabNavigator();
 
+const emptyScreen = () =>{
+    return(null)
+}
+
 export class Main extends Component {
     componentDidMount(){
        this.props.fetchUser()
     }
+
+
     render() {
         
         return (
-            <Tab.Navigator>
+            <Tab.Navigator initialRouteName="Feed">
       <Tab.Screen name="Feed" component={Feed} 
       options={{
-        
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="home" color={color} size={26} />
         ),
       }}/>
       
-      <Tab.Screen name="Add" component={Add} 
+      <Tab.Screen name="MainAdd" component={emptyScreen} 
+      listeners = {({navigation}) =>({
+          tabPress: event =>{
+              event.preventDefault()
+              navigation.navigate("Add")
+          }
+
+      })}
       options={{
-        
         tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="home" color={color} size={26} />
+          <MaterialCommunityIcons name="plus-box" color={color} size={26} />
         ),
       }}/>
     
       <Tab.Screen name="Profile" component={Profile} 
-      options={{
-        
+      options={{  
         tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="home" color={color} size={26} />
+          <MaterialCommunityIcons name="account-circle" color={color} size={26} />
         ),
       }}/>
        
