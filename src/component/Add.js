@@ -41,7 +41,7 @@ export default function Add({navigation}) {
       quality: 1,
     });
 
-    console.log(result);
+   
 
     if (!result.cancelled) {
       setImage(result.uri);
@@ -63,7 +63,7 @@ export default function Add({navigation}) {
       ref={ref => setCamera(ref)}/>
       </View>
       <Button title="pick image from gallery" onPress ={() =>pickImage()}/>
-      <Button title="Save Picture" onPress = {() =>navigation.navigate("save"),{image}}/>
+      <Button title="Save Picture" onPress = {() =>navigation.navigate("save",{image})}/>
 
       <Button  title="take Picture" onPress ={()=> takepicture()} />
       {image && <Image source ={{uri:image}} style ={{flex:1}} />}

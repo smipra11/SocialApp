@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import{View,Text,TextInput,Button} from 'react-native'
+import{View,Text,TextInput,Button,StyleSheet} from 'react-native'
 import firebase from 'firebase'
 
 export default class Register extends Component {
@@ -35,13 +35,17 @@ export default class Register extends Component {
     render() {
 
         return (
-            <View>
-                <TextInput  placeholder="name" onChangeText= {(name)=> this.setState({name})}/>
+            <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+                <TextInput  placeholder="name" onChangeText= {(name)=> this.setState({name})}style ={styles.TextInput}/>
 
-                <TextInput  placeholder="email" onChangeText= {(email)=> this.setState({email})}/>
-                <TextInput  placeholder="password"  secureTextEntry={true}  onChangeText= {(password)=> this.setState({password})}/>
+                <TextInput  placeholder="email" onChangeText= {(email)=> this.setState({email})} style={styles.TextInput}/>
+                <TextInput  placeholder="password"  secureTextEntry={true}  onChangeText= {(password)=> this.setState({password})} style={styles.TextInput}/>
 
-               <Button title="Sign Up" onPress ={()=> this.onSignup()}/>
+               <View style={{width:300}}>
+               <Button title="Sign Up" onPress ={()=> this.onSignup()} />
+
+               </View>
+               
             
             </View>
                 
@@ -49,3 +53,18 @@ export default class Register extends Component {
         )
     }
 }
+
+const styles =StyleSheet.create({
+    TextInput:{
+        height:50,
+        width:300,
+        marginHorizontal:40,
+        marginBottom:15,
+        padding:10,
+        borderWidth:0.5,
+        borderColor:'gray',
+        backgroundColor:'white'
+
+    }
+
+})
