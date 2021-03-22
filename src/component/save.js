@@ -6,11 +6,13 @@ import 'firebase/firestore'
 import 'firebase/storage'
 
 const Save = (props) => {
-    console.log(props.route.params.image)
+    console.log("image is " + props.route.params.image)
     const [caption,setCaption] = useState("")
 
     const uploadImage = async () => {
         const uri = props.route.params.image;
+        console.log("image is " + uri)
+
         const response = await fetch(uri)
         const blob = await response.blob();
         const childPath = `post/${firebase.auth().currentUser.uid}/${Math.random().toString(36)}`;
@@ -57,12 +59,15 @@ const Save = (props) => {
      }
 
     return (
-        <View style={{ flex: 1 }}>
-            <Image source={{ uri: props.route.params.image }} />
-            <TextInput placeholder="write a captain"
-                onChangeText={(caption) => setCaption(caption)}
+        <View style={{ flex: 1 ,justifyContent:'center',alignItems:'center'}}>
+           <View style={{ flex: 1 ,justifyContent:'center',alignItems:'center'}}>
+           <TextInput placeholder="write a captain" style={{padding:10}}
+                onChangeText={(caption) => setCaption(caption) }
             />
             <Button title="Save" onPress={() => uploadImage()} />
+
+           </View>
+           
 
         </View>
     )

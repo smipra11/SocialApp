@@ -79,7 +79,9 @@ function Feed(props) {
     <Container>
       <FlatList 
       data={Posts}
-      renderItem ={({item}) => <Postcard  item ={item}/>}
+      renderItem ={({item}) => (<Postcard  item ={item}/>)}
+      keyExtractor ={(item)=>item.id}
+      showsVerticalScrollIndicator= {false}
       />
     </Container>
     

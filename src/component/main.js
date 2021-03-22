@@ -43,11 +43,11 @@ export class Main extends Component {
                         ),
                     }} />
       
-      <Tab.Screen name="MainAdd" component={emptyScreen} 
+      <Tab.Screen name="Add" component={Add} 
       listeners = {({navigation}) =>({
           tabPress: event =>{
               event.preventDefault()
-              navigation.navigate("Add")
+              navigation.navigate("Add",{uid: firebase.auth().currentUser.uid})
           }
 
       })}
